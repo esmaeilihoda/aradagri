@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { User, Mail, MapPin, Edit2, LogOut, Package, Heart, MessageSquare } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "@/lib/api-config";
 
 interface Stats {
   orders: number;
@@ -28,7 +29,7 @@ export default function ProfilePage() {
 
     try {
       // Fetch orders count
-      const ordersResp = await fetch("http://localhost:3000/api/orders/my?limit=1", {
+      const ordersResp = await fetch("${API_BASE_URL}/orders/my?limit=1", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (ordersResp.ok) {
@@ -37,7 +38,7 @@ export default function ProfilePage() {
       }
 
       // Fetch wishlist count
-      const wishlistResp = await fetch("http://localhost:3000/api/wishlist", {
+      const wishlistResp = await fetch("${API_BASE_URL}/wishlist", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (wishlistResp.ok) {

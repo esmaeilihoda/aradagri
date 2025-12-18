@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Package, Calendar, DollarSign, ChevronDown, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "@/lib/api-config";
 
 interface OrderItem {
   id: string;
@@ -59,7 +60,7 @@ export default function OrdersPage() {
         return;
       }
 
-      const response = await fetch("http://localhost:3000/api/orders/my", {
+      const response = await fetch("${API_BASE_URL}/orders/my", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

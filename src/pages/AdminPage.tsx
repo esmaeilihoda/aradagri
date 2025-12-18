@@ -7,6 +7,7 @@ import { Loader2, Plus, Edit2, Trash2, ShieldAlert } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
+import { API_BASE_URL } from "@/lib/api-config";
 
 interface Product {
   id: string;
@@ -76,7 +77,7 @@ export default function AdminPage() {
       const headers: Record<string, string> = {};
       if (token) headers["Authorization"] = `Bearer ${token}`;
 
-      const resp = await fetch("http://localhost:3000/api/categories", { headers });
+      const resp = await fetch("${API_BASE_URL}/categories", { headers });
       if (resp.ok) {
         const data = await resp.json();
         if (data.success && data.data) {
@@ -99,7 +100,7 @@ export default function AdminPage() {
       }
 
       if (activeTab === "products") {
-        const resp = await fetch("http://localhost:3000/api/products", { headers });
+        const resp = await fetch("${API_BASE_URL}/products", { headers });
         if (resp.ok) {
           const data = await resp.json();
           if (data.success && data.data) {
@@ -109,7 +110,7 @@ export default function AdminPage() {
       } else if (activeTab === "categories") {
         await loadCategories();
       } else if (activeTab === "orders") {
-        const resp = await fetch("http://localhost:3000/api/orders/admin/all", { headers });
+        const resp = await fetch("${API_BASE_URL}/orders/admin/all", { headers });
         if (resp.ok) {
           const data = await resp.json();
           if (data.success && data.data) {
@@ -146,7 +147,7 @@ export default function AdminPage() {
         "Authorization": `Bearer ${token}`,
       };
 
-      const response = await fetch("http://localhost:3000/api/products", {
+      const response = await fetch("${API_BASE_URL}/products", {
         method: "POST",
         headers,
         body: JSON.stringify({
@@ -178,7 +179,7 @@ export default function AdminPage() {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/products/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -211,7 +212,7 @@ export default function AdminPage() {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:3000/api/categories", {
+      const response = await fetch("${API_BASE_URL}/categories", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -250,7 +251,7 @@ export default function AdminPage() {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:3000/api/categories/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/categories/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

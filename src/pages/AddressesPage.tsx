@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Plus, Edit2, Trash2, Star, Loader2, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { API_BASE_URL } from "@/lib/api-config";
 
 interface Address {
   id: string;
@@ -50,7 +51,7 @@ export default function AddressesPage() {
         return;
       }
 
-      const response = await fetch("http://localhost:3000/api/address", {
+      const response = await fetch("${API_BASE_URL}/address", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -75,8 +76,8 @@ export default function AddressesPage() {
 
     try {
       const url = editingAddress 
-        ? `http://localhost:3000/api/address/${editingAddress.id}`
-        : "http://localhost:3000/api/address";
+        ? `${API_BASE_URL}/address/${editingAddress.id}`
+        : "${API_BASE_URL}/address";
       
       const response = await fetch(url, {
         method: editingAddress ? "PUT" : "POST",
@@ -129,7 +130,7 @@ export default function AddressesPage() {
     if (!token) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/api/address/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/address/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -155,7 +156,7 @@ export default function AddressesPage() {
     if (!token) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/api/address/${id}/default`, {
+      const response = await fetch(`${API_BASE_URL}/address/${id}/default`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${token}` },
       });

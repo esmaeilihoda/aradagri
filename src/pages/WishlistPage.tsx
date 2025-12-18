@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Heart, Trash2, ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "@/lib/api-config";
 
 interface WishlistItem {
   id: string;
@@ -57,7 +58,7 @@ export default function WishlistPage() {
       try {
         setLoading(true);
         setError(null);
-        const res = await fetch("http://localhost:3000/api/wishlist", {
+        const res = await fetch("${API_BASE_URL}/wishlist", {
           headers: {
             "Content-Type": "application/json",
             Authorization: token ? `Bearer ${token}` : "",
@@ -101,7 +102,7 @@ export default function WishlistPage() {
   const removeItem = async (id: string) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:3000/api/wishlist/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/wishlist/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: token ? `Bearer ${token}` : "",

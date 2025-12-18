@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import { API_BASE_URL } from "@/lib/api-config";
 
 interface Product {
   id: string;
@@ -61,7 +62,7 @@ export default function ProductDetailPage() {
     if (!token || !id) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/api/wishlist/check/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/wishlist/check/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.ok) {
@@ -91,7 +92,7 @@ export default function ProductDetailPage() {
       
       if (isInWishlist) {
         // Remove from wishlist
-        const response = await fetch(`http://localhost:3000/api/wishlist/${product.id}`, {
+        const response = await fetch(`${API_BASE_URL}/wishlist/${product.id}`, {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -104,7 +105,7 @@ export default function ProductDetailPage() {
         }
       } else {
         // Add to wishlist
-        const response = await fetch("http://localhost:3000/api/wishlist/add", {
+        const response = await fetch("${API_BASE_URL}/wishlist/add", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -134,7 +135,7 @@ export default function ProductDetailPage() {
   const fetchProduct = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:3000/api/products/${id}`);
+      const response = await fetch(`${API_BASE_URL}/products/${id}`);
       
       if (!response.ok) {
         throw new Error("Product not found");
@@ -161,7 +162,7 @@ export default function ProductDetailPage() {
 
   const fetchRelatedProducts = async (categorySlug?: string) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/products?limit=4`);
+      const response = await fetch(`${API_BASE_URL}/products?limit=4`);
       if (response.ok) {
         const result = await response.json();
         if (result.success && Array.isArray(result.data)) {
@@ -201,7 +202,7 @@ export default function ProductDetailPage() {
         headers["Authorization"] = `Bearer ${token}`;
       }
 
-      let cartUrl = "http://localhost:3000/api/cart";
+      let cartUrl = "${API_BASE_URL}/cart";
       if (!token && guestToken) {
         cartUrl += `?guestToken=${guestToken}`;
       }
@@ -227,7 +228,7 @@ export default function ProductDetailPage() {
 
       const cartId = cartData.data.id;
 
-      let addUrl = `http://localhost:3000/api/cart/${cartId}/items`;
+      let addUrl = `${API_BASE_URL}/cart/${cartId}/items`;
       if (!token && guestToken) {
         addUrl += `?guestToken=${guestToken}`;
       }

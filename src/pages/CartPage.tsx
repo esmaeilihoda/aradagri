@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Trash2, Plus, Minus, ShoppingCart, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "@/lib/api-config";
 
 interface CartItem {
   id: string;
@@ -84,8 +85,8 @@ export default function CartPage() {
       }
 
       const url = guestToken 
-        ? `http://localhost:3000/api/cart?guestToken=${guestToken}`
-        : "http://localhost:3000/api/cart";
+        ? `${API_BASE_URL}/cart?guestToken=${guestToken}`
+        : "${API_BASE_URL}/cart";
 
       const response = await fetch(url, { headers });
 
@@ -142,7 +143,7 @@ export default function CartPage() {
       }
 
       const response = await fetch(
-        `http://localhost:3000/api/cart/items/${itemId}`,
+        `${API_BASE_URL}/cart/items/${itemId}`,
         {
           method: "PUT",
           headers,
@@ -185,7 +186,7 @@ export default function CartPage() {
       }
 
       const response = await fetch(
-        `http://localhost:3000/api/cart/items/${itemId}`,
+        `${API_BASE_URL}/cart/items/${itemId}`,
         {
           method: "DELETE",
           headers,

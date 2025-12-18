@@ -5,6 +5,7 @@ import { ProductCard } from "@/components/cards";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Filter, Grid3X3, LayoutList, SlidersHorizontal, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { API_BASE_URL } from "@/lib/api-config";
 
 // Mock data for categories
 const categoryData: Record<string, { title: string; description: string; icon: string }> = {
@@ -81,7 +82,7 @@ export default function ProductsPage() {
     try {
       setLoading(true);
       // Fetch a broader list so we can still render even if category filtering isn't supported server-side.
-      const url = `http://localhost:3000/api/products?limit=50`;
+      const url = `${API_BASE_URL}/products?limit=50`;
 
       const response = await fetch(url);
       

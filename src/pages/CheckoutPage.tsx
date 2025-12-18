@@ -4,6 +4,7 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Loader2 } from "lucide-react";
+import { API_BASE_URL } from "@/lib/api-config";
 
 interface CartItem {
   id: string;
@@ -61,8 +62,8 @@ export default function CheckoutPage() {
       // Fetch cart
       const guestToken = localStorage.getItem("guestToken");
       const cartUrl = guestToken 
-        ? `http://localhost:3000/api/cart?guestToken=${guestToken}`
-        : "http://localhost:3000/api/cart";
+        ? `${API_BASE_URL}/cart?guestToken=${guestToken}`
+        : "${API_BASE_URL}/cart";
       
       const cartResp = await fetch(cartUrl, { headers });
       if (cartResp.ok) {
@@ -84,7 +85,7 @@ export default function CheckoutPage() {
 
       // Fetch addresses if logged in
       if (token) {
-        const addrResp = await fetch("http://localhost:3000/api/address", { headers });
+        const addrResp = await fetch("${API_BASE_URL}/address", { headers });
         if (addrResp.ok) {
           const addrData = await addrResp.json();
           if (addrData.success && Array.isArray(addrData.data)) {
@@ -136,7 +137,7 @@ export default function CheckoutPage() {
         "Authorization": `Bearer ${token}`,
       };
 
-      const response = await fetch("http://localhost:3000/api/orders", {
+      const response = await fetch("${API_BASE_URL}/orders", {
         method: "POST",
         headers,
         body: JSON.stringify({ cartId }),
