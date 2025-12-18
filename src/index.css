@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Arad Agricultural Theme - Natural Greens & Earth Tones */
+    --background: 45 20% 98%;
+    --foreground: 30 10% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 30 10% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 10% 15%;
+
+    /* Forest Green - Primary */
+    --primary: 95 60% 25%;
+    --primary-foreground: 45 20% 98%;
+
+    /* Earth Tone - Secondary */
+    --secondary: 30 40% 75%;
+    --secondary-foreground: 30 30% 20%;
+
+    /* Muted - Light Sage */
+    --muted: 90 15% 92%;
+    --muted-foreground: 30 10% 45%;
+
+    /* Accent - Golden Amber */
+    --accent: 38 70% 55%;
+    --accent-foreground: 30 30% 15%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 30 20% 88%;
+    --input: 30 20% 88%;
+    --ring: 95 60% 25%;
+
+    --radius: 0.75rem;
+
+    /* Custom Arad Colors */
+    --arad-forest: 95 60% 25%;
+    --arad-forest-light: 95 45% 35%;
+    --arad-forest-dark: 95 65% 18%;
+    --arad-soil: 25 35% 30%;
+    --arad-amber: 38 70% 55%;
+    --arad-amber-light: 40 75% 70%;
+    --arad-sand: 40 30% 90%;
+    --arad-cream: 45 30% 96%;
+    --arad-sage: 100 25% 85%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(95 60% 25%) 0%, hsl(95 45% 35%) 50%, hsl(38 70% 55%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(45 30% 98%) 100%);
+    --gradient-section: linear-gradient(180deg, hsl(45 20% 98%) 0%, hsl(90 15% 95%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(38 70% 55%) 0%, hsl(30 60% 50%) 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px -2px hsl(30 20% 20% / 0.08);
+    --shadow-md: 0 8px 24px -8px hsl(30 20% 20% / 0.12);
+    --shadow-lg: 0 16px 48px -12px hsl(30 20% 20% / 0.15);
+    --shadow-glow: 0 0 40px hsl(95 60% 25% / 0.2);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 30 10% 25%;
+    --sidebar-primary: 95 60% 25%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 90 15% 92%;
+    --sidebar-accent-foreground: 30 10% 25%;
+    --sidebar-border: 30 20% 88%;
+    --sidebar-ring: 95 60% 25%;
+  }
+
+  .dark {
+    --background: 30 15% 8%;
+    --foreground: 45 20% 95%;
+
+    --card: 30 15% 12%;
+    --card-foreground: 45 20% 95%;
+
+    --popover: 30 15% 12%;
+    --popover-foreground: 45 20% 95%;
+
+    --primary: 95 50% 45%;
+    --primary-foreground: 30 15% 8%;
+
+    --secondary: 30 25% 25%;
+    --secondary-foreground: 45 20% 90%;
+
+    --muted: 30 15% 18%;
+    --muted-foreground: 30 15% 65%;
+
+    --accent: 38 65% 50%;
+    --accent-foreground: 30 15% 8%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 30 15% 20%;
+    --input: 30 15% 20%;
+    --ring: 95 50% 45%;
+
+    --sidebar-background: 30 15% 10%;
+    --sidebar-foreground: 45 20% 90%;
+    --sidebar-primary: 95 50% 45%;
+    --sidebar-primary-foreground: 30 15% 8%;
+    --sidebar-accent: 30 15% 18%;
+    --sidebar-accent-foreground: 45 20% 90%;
+    --sidebar-border: 30 15% 20%;
+    --sidebar-ring: 95 50% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    direction: rtl;
+  }
+
+  body {
+    @apply bg-background text-foreground font-vazir antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .container-arad {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .btn-glow {
+    @apply relative overflow-hidden;
+  }
+
+  .btn-glow::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full;
+    animation: shimmer 2s infinite;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  }
+
+  .glass-effect {
+    @apply bg-card/80 backdrop-blur-md border border-border/50;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary/50;
+}
